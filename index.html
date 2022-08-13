@@ -14,6 +14,7 @@
       <input class="input" type="text" autofocus>
     </label>
   </form>
+  <div class="error"></div>
 </div>
 <script type="module">
   import init, {evaluate} from "./pkg/lisp.js";
@@ -23,10 +24,16 @@
     e.preventDefault();
     const input = document.querySelector(".input");
     const output = document.querySelector(".output");
-    const result = evaluate(input.value);
-    output.innerHTML += `\n\n>>> ${input.value}\n${result}`;
-    output.scrollTo(0, output.scrollHeight);
-    input.value = "";
+    const error = document.querySelector(".error");
+    try {
+      const result = evaluate(input.value);
+      output.innerHTML += `\n\n>>> ${input.value}\n${result}`;
+      output.scrollTo(0, output.scrollHeight);
+      input.value = "";
+      error.innerHTML = "";
+    } catch (e) {
+      error.innerHTML = e;
+    }
   });
 </script>
 </body>
