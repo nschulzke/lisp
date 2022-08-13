@@ -3,6 +3,7 @@ use std::mem::MaybeUninit;
 use std::sync::{Mutex, Once};
 use wasm_bindgen::prelude::*;
 use crate::env::Env;
+use crate::interpreter::eval;
 use crate::parser::parse;
 
 mod parser;
@@ -30,6 +31,6 @@ fn env() -> &'static Mutex<Env> {
 pub fn evaluate(input: &str) -> Result<String, String> {
     let env = env();
     let parsed = parse(input).map_err(|e| e.message)?;
-    let result = interpreter::eval(parsed, env.lock().unwrap().borrow_mut()).map_err(|e| e.message)?;
+    let result = eval(parsed, env.lock().unwrap().borrow_mut()).map_err(|e| e.message)?;
     Ok(format!("{}", result))
 }
