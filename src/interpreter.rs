@@ -2,7 +2,7 @@ use crate::env::Env;
 use crate::error::RuntimeError;
 use crate::object::Object;
 
-fn eval(object: Object, env: &mut Env) -> Result<Object, RuntimeError> {
+pub fn eval(object: Object, env: &mut Env) -> Result<Object, RuntimeError> {
     match object {
         Object::Integer(i) => Ok(Object::Integer(i)),
         Object::Symbol(s) => eval_symbol(s, env),

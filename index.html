@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8">
+  <title>Lisp</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+<div id="interpreter">
+  <pre class="output"></pre>
+  <form id="form">
+    <label>
+      >>>
+      <input class="input" type="text" autofocus>
+    </label>
+  </form>
+</div>
+<script type="module">
+  import init, {evaluate} from "./pkg/lisp.js";
+  init()
+
+  document.querySelector("#form").addEventListener("submit", function submit(e) {
+    e.preventDefault();
+    const input = document.querySelector(".input");
+    const output = document.querySelector(".output");
+    const result = evaluate(input.value);
+    output.innerHTML += `\n\n>>> ${input.value}\n${result}`;
+    output.scrollTo(0, output.scrollHeight);
+    input.value = "";
+  });
+</script>
+</body>
+</html>
