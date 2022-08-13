@@ -41,6 +41,7 @@ impl Env {
         vars.insert("if".to_string(), Object::SpecialForm("if".to_string(), Some(3)));
         vars.insert("def".to_string(), Object::SpecialForm("def".to_string(), Some(2)));
         vars.insert("fn".to_string(), Object::SpecialForm("fn".to_string(), Some(2)));
+        vars.insert("quote".to_string(), Object::SpecialForm("quote".to_string(), Some(1)));
         vars.insert("#true".to_string(), Object::Boolean(true));
         vars.insert("#false".to_string(), Object::Boolean(false));
         Env {
